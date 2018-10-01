@@ -21,14 +21,14 @@ public abstract class AbstractClickable implements Clickable
     public void enter(int x, int y)
     {
         focused = true;
-        do_enter(x, y);
+        do_enter(x - getX(), y - getY());
     }
 
     @Override
     public void exit(int x, int y)
     {
         if(!focused) throw new IllegalStateException();
-        else do_exit(x, y);
+        else do_exit(x - getX(), y - getY());
         focused = false;
     }
 
@@ -36,14 +36,14 @@ public abstract class AbstractClickable implements Clickable
     public void press(int x, int y)
     {
         depressed = true;
-        do_press(x, y);
+        do_press(x - getX(), y - getY());
     }
 
     @Override
     public void release(int x, int y)
     {
         if(!depressed) throw new IllegalStateException();
-        else do_release(x, y);
+        else do_release(x - getX(), y - getY());
         depressed = false;
     }
 

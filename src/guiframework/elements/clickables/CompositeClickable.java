@@ -38,16 +38,9 @@ public class CompositeClickable extends AbstractClickable
     @Override
     public boolean pointIsOn(int x, int y)
     {
-        //
-//        if(super.pointIsOn(x, y))
-//        {
-            int relativeX = x - getX();
-            int relativeY = y - getY();
-
-            for(Clickable clickable : components)
-                if(clickable.pointIsOn(relativeX, relativeY))
-                    return true;
-//        }
+        for(Clickable clickable : components)
+            if(clickable.pointIsOn(x - getX(), y - getY()))
+                return true;
 
         return false;
     }
@@ -56,9 +49,6 @@ public class CompositeClickable extends AbstractClickable
     public void do_enter(int x, int y)
     {
         Clickable c = getComponent(x, y);
-
-        x -= getX();
-        y -= getY();
 
         if(c != focused)
         {
@@ -81,9 +71,6 @@ public class CompositeClickable extends AbstractClickable
     public void do_press(int x, int y)
     {
         pressed = getComponent(x, y);
-
-        x -= getX();
-        y -= getY();
 
         pressed.press(x, y);
     }
@@ -118,9 +105,6 @@ public class CompositeClickable extends AbstractClickable
 
     private Clickable getComponent(int x, int y)
     {
-        x -= getX();
-        y -= getY();
-
         for(Clickable clickable : components)
         {
             if(clickable.pointIsOn(x, y))

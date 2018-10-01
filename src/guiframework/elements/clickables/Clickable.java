@@ -7,7 +7,7 @@ public interface Clickable extends Locatable
     default boolean pointIsOn(int x, int y)
     {
         int thisX = getX(), thisY = getY();
-        return (x >= thisX && y >= thisY && x <= thisX + getWidth() && y <= thisY + getHeight());
+        return (x >= thisX && y >= thisY && x < thisX + getWidth() && y < thisY + getHeight());
     }
 
     void enter(int x, int y);

@@ -24,16 +24,9 @@ public class InclusiveClickable extends AbstractClickable
     @Override
     public boolean pointIsOn(int x, int y)
     {
-        //
-        if(super.pointIsOn(x, y))
-        {
-            int relativeX = x - getX();
-            int relativeY = y - getY();
-
-            for(Clickable clickable : components)
-                if(clickable.pointIsOn(relativeX, relativeY))
-                    return true;
-        }
+        for(Clickable clickable : components)
+            if(clickable.pointIsOn(x, y))
+                return true;
 
         return false;
     }
@@ -108,9 +101,6 @@ public class InclusiveClickable extends AbstractClickable
     private Collection<Clickable> getComponents(int x, int y)
     {
         Collection<Clickable> clickables = new LinkedHashSet<>();
-
-        x -= getX();
-        y -= getY();
 
         for(Clickable clickable : components)
         {
