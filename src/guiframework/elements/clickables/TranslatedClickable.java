@@ -47,6 +47,9 @@ public class TranslatedClickable extends AbstractClickable
     {
         target.release(x + dx, y + dy);
     }
+
+    @Override
+    protected void do_traverse(int x, int y) { target.traverse(x + dx, y + dy); }
     
     @Override
     public boolean pointIsOn(int x, int y)

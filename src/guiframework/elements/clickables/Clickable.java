@@ -7,13 +7,14 @@ public interface Clickable extends Locatable
     default boolean pointIsOn(int x, int y)
     {
         int thisX = getX(), thisY = getY();
-        return (x >= thisX && y >= thisY && x < thisX + getWidth() && y < thisY + getHeight());
+        return (x >= thisX) && (y >= thisY) && (x < (thisX + getWidth())) && (y < (thisY + getHeight()));
     }
 
     void enter(int x, int y);
     void exit(int x, int y);
     void press(int x, int y);
     void release(int x, int y);
+    void traverse(int x, int y);
 
     Clickable NULL = new Clickable()
     {
@@ -23,6 +24,7 @@ public interface Clickable extends Locatable
         public void exit(int x, int y) {}
         public void press(int x, int y) {}
         public void release(int x, int y) {}
+        public void traverse(int x, int y) {}
 
         public int getWidth() { return 0; }
         public int getHeight() { return 0; }

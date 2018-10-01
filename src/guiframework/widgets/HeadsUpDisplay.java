@@ -52,6 +52,9 @@ public class HeadsUpDisplay implements Clickable, Displayable
     }
 
     @Override
+    public void traverse(int x, int y) { root.traverse(x, y); }
+
+    @Override
     public void display(Graphics2D g2d)
     {
         root.display(g2d);

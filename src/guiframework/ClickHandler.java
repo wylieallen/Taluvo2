@@ -10,7 +10,7 @@ public class ClickHandler implements MouseListener, MouseMotionListener
 {
     private Clickable root;
 
-    public ClickHandler(Clickable root) { this.root = root; }
+    public ClickHandler(Clickable root) { setRoot(root); }
 
     public Clickable getRoot() { return root; }
     public void setRoot(Clickable root) { this.root = root; }
@@ -31,10 +31,7 @@ public class ClickHandler implements MouseListener, MouseMotionListener
     }
 
     @Override
-    public void mouseDragged(MouseEvent e)
-    {
-        mouseMoved(e);
-    }
+    public void mouseDragged(MouseEvent e) { mouseMoved(e); }
 
     @Override
     public void mouseEntered(MouseEvent e)
@@ -43,11 +40,11 @@ public class ClickHandler implements MouseListener, MouseMotionListener
     }
 
     @Override
-    public void mouseExited(MouseEvent e) { }
+    public void mouseExited(MouseEvent e) { /*root.exit(e.getX(), e.getY());*/ }
 
     @Override
     public void mouseMoved(MouseEvent e)
     {
-        root.enter(e.getX(), e.getY());
+        root.traverse(e.getX(), e.getY());
     }
 }

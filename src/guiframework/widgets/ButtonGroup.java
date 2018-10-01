@@ -52,6 +52,7 @@ public class ButtonGroup implements Clickable, Displayable
     public void exit(int x, int y) { clickable.exit(x, y); }
     public void press(int x, int y) { clickable.press(x, y); }
     public void release(int x, int y) { clickable.release(x, y); }
+    public void traverse(int x, int y) { clickable.traverse(x, y); }
 
     public boolean pointIsOn(int x, int y) { return clickable.pointIsOn(x, y); }
 }

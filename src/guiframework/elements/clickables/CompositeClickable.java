@@ -83,6 +83,23 @@ public class CompositeClickable extends AbstractClickable
         pressed = Clickable.NULL;
     }
 
+    @Override
+    public void do_traverse(int x, int y)
+    {
+        Clickable c = getComponent(x, y);
+
+        if(c != focused)
+        {
+            focused.exit(x, y);
+            focused = c;
+            focused.enter(x, y);
+        }
+        else
+        {
+            focused.traverse(x, y);
+        }
+    }
+
     private void resize()
     {
         int minX = getX(), minY = getY();

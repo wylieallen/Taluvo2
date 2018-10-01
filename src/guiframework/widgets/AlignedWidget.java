@@ -31,10 +31,7 @@ public class AlignedWidget implements Displayable, Clickable
     }
 
     @Override
-    public void exit(int x, int y)
-    {
-        clickable.exit(x, y);
-    }
+    public void exit(int x, int y) { clickable.exit(x, y); }
 
     @Override
     public void press(int x, int y)
@@ -47,6 +44,9 @@ public class AlignedWidget implements Displayable, Clickable
     {
         clickable.release(x, y);
     }
+
+    @Override
+    public void traverse(int x, int y) { clickable.traverse(x, y); }
 
     @Override
     public void display(Graphics2D g2d)

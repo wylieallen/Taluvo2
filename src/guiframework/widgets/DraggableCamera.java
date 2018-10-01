@@ -32,6 +32,11 @@ public class DraggableCamera implements Clickable, Displayable
 
         Point cameraPoint = new Point(0, 0);
         cameraController.setEnter((nextX, nextY) -> {
+            cameraPoint.x = nextX;
+            cameraPoint.y = nextY;
+        });
+
+        cameraController.setTraverse((nextX, nextY) -> {
             if(cameraController.isDepressed())
             {
                 translate(nextX - cameraPoint.x, nextY - cameraPoint.y);
@@ -96,6 +101,9 @@ public class DraggableCamera implements Clickable, Displayable
     {
         clickRoot.release(x, y);
     }
+
+    @Override
+    public void traverse(int x, int y) { clickRoot.traverse(x, y); }
 
     @Override
     public void display(Graphics2D g2d)

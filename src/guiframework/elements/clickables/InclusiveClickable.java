@@ -78,6 +78,38 @@ public class InclusiveClickable extends AbstractClickable
         presseds.clear();
     }
 
+    @Override
+    public void do_traverse(int x, int y)
+    {
+        Collection<Clickable> removeFromFocuseds = new HashSet<>();
+
+        for(Clickable clickable : focuseds)
+        {
+            if(!clickable.pointIsOn(x, y))
+            {
+                removeFromFocuseds.add(clickable);
+                clickable.exit(x, y);
+            }
+        }
+
+        focuseds.removeAll(removeFromFocuseds);
+
+        Collection<Clickable> clickables = getComponents(x, y);
+
+        clickables.forEach(clickable ->
+        {
+            if(focuseds.contains(clickable))
+            {
+                clickable.traverse(x, y);
+            }
+            else
+            {
+                focuseds.add(clickable);
+                clickable.enter(x, y);
+            }
+        });
+    }
+
     public void resize()
     {
         int minX = getX(), minY = getY();

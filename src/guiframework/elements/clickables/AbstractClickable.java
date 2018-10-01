@@ -47,10 +47,18 @@ public abstract class AbstractClickable implements Clickable
         depressed = false;
     }
 
+    @Override
+    public void traverse(int x, int y)
+    {
+        if(!focused) throw new IllegalStateException();
+        else do_traverse(x - getX(), y - getY());
+    }
+
     protected abstract void do_enter(int x, int y);
     protected abstract void do_exit(int x, int y);
     protected abstract void do_press(int x, int y);
     protected abstract void do_release(int x, int y);
+    protected abstract void do_traverse(int x, int y);
 
     @Override
     public int getX() { return x; }

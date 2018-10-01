@@ -2,12 +2,12 @@ package guiframework.elements.clickables;
 
 public class SimpleClickable extends AbstractClickable
 {
-    private MouseAction enter, exit, press, release;
+    private MouseAction enter, exit, press, release, traverse;
 
     public SimpleClickable(int x, int y, int width, int height)
     {
         super(x, y, width, height);
-        enter = exit = press = release = MouseAction.NULL;
+        enter = exit = press = release = traverse = MouseAction.NULL;
     }
 
     @Override
@@ -22,8 +22,12 @@ public class SimpleClickable extends AbstractClickable
     @Override
     public void do_release(int x, int y) { release.execute(x, y); }
 
+    @Override
+    public void do_traverse(int x, int y) { traverse.execute(x, y); }
+
     public void setEnter(MouseAction action) { this.enter = action; }
     public void setExit(MouseAction action) { this.exit = action; }
     public void setPress(MouseAction action) { this.press = action; }
     public void setRelease(MouseAction action) { this.release = action; }
+    public void setTraverse(MouseAction action) { this.traverse = action; }
 }
