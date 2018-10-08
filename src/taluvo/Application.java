@@ -1,10 +1,12 @@
 package taluvo;
 
-import guiframework.DisplayPanel;
-import taluvo.displayablefactories.ClassicDisplayableFactory;
-import taluvo.imagefactories.ClassicImageFactory;
-import taluvo.panelfactories.ClassicPanelFactory;
-import taluvo.panelfactories.PanelFactory;
+import guiframework.InterfacePanel;
+import guiframework.elements.clickables.Clickable;
+import guiframework.elements.displayables.Displayable;
+import taluvo.gui.factories.displayablefactories.ClassicDisplayableFactory;
+import taluvo.gui.factories.imagefactories.ClassicImageFactory;
+import taluvo.gui.factories.panelfactories.ClassicPanelFactory;
+import taluvo.gui.factories.panelfactories.PanelFactory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +14,6 @@ import java.awt.*;
 public class Application
 {
     private static Timer timer;
-    private static DisplayPanel panel;
 
     public static void main(String[] args)
     {
@@ -27,7 +28,8 @@ public class Application
         frame.setSize(1280 + 16, 720 + 39);
         frame.setTitle("Taluvo2 v0.0");
 
-        panel = panelFactory.makeTestPanel();
+        InterfacePanel panel = new InterfacePanel(Displayable.NULL, Clickable.NULL);
+        panelFactory.configureGamePanel(panel);
         frame.setContentPane(panel);
         panel.setBackground(Color.BLUE);
 

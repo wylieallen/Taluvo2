@@ -6,31 +6,27 @@ import java.awt.geom.AffineTransform;
 public class TranslatedDisplayable extends AbstractDisplayable
 {
     private int dx, dy;
-    private int width, height;
-    private final Displayable target;
+    private Displayable target;
 
-    public TranslatedDisplayable(int x, int y, int width, int height, Displayable target)
+    public TranslatedDisplayable(int x, int y, Displayable target)
     {
         super(x, y);
-        this.width = width;
-        this.height = height;
         dx = dy = 0;
         this.target = target;
     }
 
     public void update() { target.update(); }
 
-    public int getWidth() { return width; }
-    public int getHeight() { return height; }
-
-    public void setWidth(int width) { this.width = width; }
-    public void setHeight(int height) { this.height = height; }
+    public int getWidth() { return target.getWidth(); }
+    public int getHeight() { return target.getHeight(); }
 
     public int getDx() { return dx; }
     public int getDy() { return dy; }
 
     public void setTranslation(int x, int y) { dx = x; dy = y; }
     public void translate(int dx, int dy) { this.dx += dx; this.dy += dy; }
+
+    public void setTarget(Displayable target) { this.target = target; }
 
     public void do_display(Graphics2D g2d)
     {

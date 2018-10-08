@@ -1,15 +1,17 @@
-package guiframework.elements.clickables;
+package guiframework.elements.clickables.composites;
+
+import guiframework.elements.clickables.Clickable;
 
 import java.util.*;
 
-public class InclusiveClickable extends AbstractClickable
+public class InclusiveClickable extends CompositeClickable
 {
     private final Set<Clickable> components;
     private final Set<Clickable> focuseds, presseds;
 
     public InclusiveClickable(int x, int y)
     {
-        super(x, y, 0, 0);
+        super(x, y);
         this.components = new HashSet<>();
         this.focuseds = new HashSet<>();
         this.presseds = new HashSet<>();
@@ -18,6 +20,12 @@ public class InclusiveClickable extends AbstractClickable
     public void add(Clickable clickable)
     {
         components.add(clickable);
+        resize();
+    }
+
+    public void remove(Clickable clickable)
+    {
+        components.remove(clickable);
         resize();
     }
 

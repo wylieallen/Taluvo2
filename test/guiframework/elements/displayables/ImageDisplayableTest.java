@@ -59,4 +59,12 @@ class ImageDisplayableTest extends AbstractDisplayableTest
 
         Assertions.assertEquals(canvas1, displayable.getImage());
     }
+
+    @Test
+    @DisplayName("Test that ImageDisplayable has the same dimensions as its image")
+    void testGetDimensions()
+    {
+        Assertions.assertEquals(displayable.getWidth(), image.getWidth());
+        Assertions.assertEquals(displayable.getHeight(), image.getHeight());
+    }
 }

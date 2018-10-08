@@ -1,21 +1,23 @@
 package guiframework.widgets;
 
 import guiframework.elements.clickables.Clickable;
-import guiframework.elements.clickables.composites.ExclusiveClickable;
-import guiframework.elements.displayables.AlignedDisplayable;
 import guiframework.elements.displayables.Displayable;
 
 import java.awt.*;
 
-public class AlignedWidget implements Displayable, Clickable
+public class Widget implements Clickable, Displayable
 {
-    private final AlignedDisplayable displayable;
-    private final ExclusiveClickable clickable;
+    private final Clickable clickable;
+    private final Displayable displayable;
 
-    public AlignedWidget(int x, int y, int span, int endBuffer, AlignedDisplayable.Orientation orientation, AlignedDisplayable.Alignment alignment)
+    public Widget(int x, int y, Clickable clickable, Displayable displayable)
     {
-        this.displayable = new AlignedDisplayable(x, y, span, endBuffer, orientation, alignment);
-        this.clickable = new ExclusiveClickable(x, y);
+        this.clickable = clickable;
+        clickable.setX(x);
+        clickable.setY(y);
+        this.displayable = displayable;
+        displayable.setX(x);
+        displayable.setY(y);
     }
 
     @Override
@@ -31,7 +33,10 @@ public class AlignedWidget implements Displayable, Clickable
     }
 
     @Override
-    public void exit(int x, int y) { clickable.exit(x, y); }
+    public void exit(int x, int y)
+    {
+        clickable.exit(x, y);
+    }
 
     @Override
     public void press(int x, int y)
@@ -46,7 +51,10 @@ public class AlignedWidget implements Displayable, Clickable
     }
 
     @Override
-    public void traverse(int x, int y) { clickable.traverse(x, y); }
+    public void traverse(int x, int y)
+    {
+        clickable.traverse(x, y);
+    }
 
     @Override
     public void display(Graphics2D g2d)
@@ -87,36 +95,14 @@ public class AlignedWidget implements Displayable, Clickable
     @Override
     public void setX(int x)
     {
-        displayable.setX(x);
         clickable.setX(x);
+        displayable.setX(x);
     }
 
     @Override
     public void setY(int y)
     {
-        displayable.setY(y);
         clickable.setY(y);
-    }
-
-    public void add(Displayable d)
-    {
-        displayable.add(d);
-    }
-
-    public <T extends Clickable & Displayable> void add(T widget)
-    {
-        displayable.add(widget);
-        clickable.add(widget);
-    }
-
-    public void setSpan(int span)
-    {
-        displayable.setSpan(span);
-        displayable.resize();
-    }
-
-    public void resize()
-    {
-        displayable.resize();
+        displayable.setY(y);
     }
 }

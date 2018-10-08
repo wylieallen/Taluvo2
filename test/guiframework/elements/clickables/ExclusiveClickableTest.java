@@ -1,6 +1,8 @@
 package guiframework.elements.clickables;
 
-public class CompositeClickableTest extends AbstractClickableTest
+import guiframework.elements.clickables.composites.ExclusiveClickable;
+
+public class ExclusiveClickableTest extends AbstractClickableTest
 {
     @Override
     protected Clickable makeClickable(int x, int y, int width, int height)
@@ -11,7 +13,7 @@ public class CompositeClickableTest extends AbstractClickableTest
         component.setPress((a, b) -> press());
         component.setRelease((a, b) -> release());
 
-        CompositeClickable composite = new CompositeClickable(x, y);
+        ExclusiveClickable composite = new ExclusiveClickable(x, y);
         composite.add(component);
         return composite;
     }

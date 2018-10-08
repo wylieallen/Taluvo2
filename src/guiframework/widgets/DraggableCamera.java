@@ -1,18 +1,23 @@
 package guiframework.widgets;
 
 import guiframework.elements.clickables.*;
+import guiframework.elements.clickables.composites.ExclusiveClickable;
+import guiframework.elements.clickables.composites.InclusiveClickable;
 import guiframework.elements.displayables.CompositeDisplayable;
 import guiframework.elements.displayables.Displayable;
 import guiframework.elements.displayables.TranslatedDisplayable;
+import javafx.scene.transform.Affine;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Point2D;
 
 public class DraggableCamera implements Clickable, Displayable
 {
     private final InclusiveClickable clickRoot;
     private final SimpleClickable cameraController;
     private final TranslatedClickable translatedClickable;
-    private final CompositeClickable clickEdge;
+    private final ExclusiveClickable clickEdge;
 
     private final TranslatedDisplayable displayRoot;
     private final CompositeDisplayable displayEdge;
@@ -20,7 +25,7 @@ public class DraggableCamera implements Clickable, Displayable
     public DraggableCamera(int x, int y, int width, int height)
     {
         this.cameraController = new SimpleClickable(0, 0, width, height);
-        this.clickEdge = new CompositeClickable(0, 0);
+        this.clickEdge = new ExclusiveClickable(0, 0);
         this.translatedClickable = new TranslatedClickable(0, 0, width, height, clickEdge);
 
         this.clickRoot = new InclusiveClickable(x, y);
@@ -28,7 +33,7 @@ public class DraggableCamera implements Clickable, Displayable
         clickRoot.add(translatedClickable);
 
         this.displayEdge = new CompositeDisplayable(0, 0);
-        this.displayRoot = new TranslatedDisplayable(x, y, width, height, displayEdge);
+        this.displayRoot = new TranslatedDisplayable(x, y, displayEdge);
 
         Point cameraPoint = new Point(0, 0);
         cameraController.setEnter((nextX, nextY) -> {
@@ -58,6 +63,9 @@ public class DraggableCamera implements Clickable, Displayable
 
     @Override
     public int getHeight() { return clickRoot.getHeight(); }
+
+    public int getDx() { return displayRoot.getDx(); }
+    public int getDy() { return displayRoot.getDy(); }
 
     @Override
     public void setX(int x)
@@ -103,7 +111,10 @@ public class DraggableCamera implements Clickable, Displayable
     }
 
     @Override
-    public void traverse(int x, int y) { clickRoot.traverse(x, y); }
+    public void traverse(int x, int y)
+    {
+        clickRoot.traverse(x, y);
+    }
 
     @Override
     public void display(Graphics2D g2d)
@@ -126,8 +137,8 @@ public class DraggableCamera implements Clickable, Displayable
         cameraController.setHeight(newHeight);
 
         displayRoot.translate((newWidth - prevWidth) / 2 , (newHeight - prevHeight) / 2);
-        displayRoot.setWidth(newWidth);
-        displayRoot.setHeight(newHeight);
+//        displayRoot.setWidth(newWidth);
+//        displayRoot.setHeight(newHeight);
 
         translatedClickable.translate((newWidth - prevWidth) / 2, (newHeight - prevHeight) / 2);
         translatedClickable.setWidth(newWidth);

@@ -25,6 +25,7 @@ class CompositeDisplayableTest extends AbstractDisplayableTest
     void initializeDisplayables()
     {
         this.displayable = new CompositeDisplayable(0, 0);
+
         this.component1 = new TestDisplayable(5, 5);
         this.component2 = new TestDisplayable(0, 0);
         displayable.add(component1);
@@ -71,5 +72,19 @@ class CompositeDisplayableTest extends AbstractDisplayableTest
 
         Assertions.assertEquals(1, component1.getUpdates());
         Assertions.assertEquals(2, component2.getUpdates());
+    }
+
+    @Test
+    @DisplayName("Test that CompositeDisplayable's width and height vary depending on its children")
+    void testGetDimensions()
+    {
+        Assertions.assertEquals(15, displayable.getWidth());
+        Assertions.assertEquals(15, displayable.getHeight());
+
+        displayable.remove(component1);
+        displayable.remove(component2);
+
+        Assertions.assertEquals(0, displayable.getWidth());
+        Assertions.assertEquals(0, displayable.getHeight());
     }
 }

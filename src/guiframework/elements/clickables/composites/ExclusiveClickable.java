@@ -1,17 +1,19 @@
-package guiframework.elements.clickables;
+package guiframework.elements.clickables.composites;
+
+import guiframework.elements.clickables.Clickable;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 
-public class CompositeClickable extends AbstractClickable
+public class ExclusiveClickable extends CompositeClickable
 {
     private final Set<Clickable> components;
     private Clickable focused, pressed;
 
-    public CompositeClickable(int x, int y)
+    public ExclusiveClickable(int x, int y)
     {
-        super(x, y, 0, 0);
+        super(x, y);
         components = new LinkedHashSet<>();
         focused = Clickable.NULL;
         pressed = Clickable.NULL;
@@ -100,7 +102,7 @@ public class CompositeClickable extends AbstractClickable
         }
     }
 
-    private void resize()
+    public void resize()
     {
         int minX = getX(), minY = getY();
         int maxX = Integer.MIN_VALUE, maxY = Integer.MIN_VALUE;

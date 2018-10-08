@@ -39,6 +39,13 @@ public class CompositeDisplayable extends AbstractDisplayable
 
     private void resize()
     {
+        if(displayables.isEmpty())
+        {
+            width = 0;
+            height = 0;
+            return;
+        }
+
         int minX = Integer.MAX_VALUE, minY = Integer.MAX_VALUE;
         int maxX = Integer.MIN_VALUE, maxY = Integer.MIN_VALUE;
 
