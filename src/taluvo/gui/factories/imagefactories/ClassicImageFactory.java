@@ -15,10 +15,12 @@ public class ClassicImageFactory implements ImageFactory
         return new Polygon(hexX, hexY, 6);
     }
 
+    @Override
     public BufferedImage makeBorderedHex(Color bodyColor, Color borderColor)
     {
-        BufferedImage image = new BufferedImage(hexagon.getBounds().width, hexagon.getBounds().height, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage image = new BufferedImage(hexagon.getBounds().width + 1, hexagon.getBounds().height + 1, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = image.createGraphics();
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setColor(bodyColor);
         g2d.fill(hexagon);
         g2d.setColor(borderColor);
@@ -31,7 +33,7 @@ public class ClassicImageFactory implements ImageFactory
     {
         BufferedImage[] images = new BufferedImage[3];
         images[0] = makeBorderedHex(base, border);
-        images[1] = makeBorderedHex(hover, press);
+        images[1] = makeBorderedHex(hover, border);
         images[2] = makeBorderedHex(press, border);
         return images;
     }

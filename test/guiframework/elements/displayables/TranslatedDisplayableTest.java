@@ -1,5 +1,6 @@
 package guiframework.elements.displayables;
 
+import guiframework.elements.displayables.primitives.ImageDisplayable;
 import guiframework.resources.TestDisplayable;
 import guiframework.resources.TestImage;
 import org.junit.jupiter.api.Assertions;

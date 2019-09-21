@@ -8,6 +8,7 @@ public interface ImageFactory
     BufferedImage[] makeMenuButton();
     BufferedImage makeBorderedRect(int width, int height, Color bodyColor);
     BufferedImage[] makeHexButton(Color base, Color hover, Color press, Color border);
+    BufferedImage makeBorderedHex(Color bodyColor, Color borderColor);
 
     Shape getHexShape();
 }

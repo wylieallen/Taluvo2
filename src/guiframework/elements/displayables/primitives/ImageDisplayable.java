@@ -1,4 +1,6 @@
-package guiframework.elements.displayables;
+package guiframework.elements.displayables.primitives;
+
+import guiframework.elements.displayables.AbstractDisplayable;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
